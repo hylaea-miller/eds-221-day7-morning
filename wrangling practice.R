@@ -119,4 +119,80 @@ week(time)
 year(time)
 day(time)
 
+# Practice lubridate within a dataframe
 
+urchin_counts <- tribble(
+  ~date, ~species, ~size_mm,
+  "10/3/2020", "purple", 55,
+  "10/4/2020", "red", 48,
+  "11/17/2020", "red", 67
+)
+
+urchin_counts %>% 
+  mutate(date = lubridate::mdy(date)) %>%
+  mutate(year = year(date),
+month = month(date),
+day = day(date))
+
+
+day_1 <- lubridate::ymd("2020-01-06")
+day_2 <- lubridate::ymd("2020-05-18")
+day_3 <- lubridate::ymd("2020-05-19")
+
+# Create a time interval
+time_interval <- interval(day_1, day_2)
+
+# Check the length in weeks
+time_length(time_interval, "week")
+time_length(time_interval, "year")
+
+# Practice with stringr
+
+# str_detect() to detect string patterns
+# Return TRUE/FALSE sepending on whether the patter is detected
+
+my_string <- "Teddy loves eating salmon and socks."
+
+# Does the pattern "love" exist within the string?
+my_string %>% str_detect("love")
+
+# Does the pattern "pup" exist within the string?
+my_string %>% str_detect("pup")
+
+my_string <- c("burrito", "fish taco", "Taco salad")
+
+# Does the vector element contain the pattern "fish"?
+my_string %>% str_detect("fish")
+
+# powerful when combined with dplyr function
+
+skywalkers <- starwars %>% 
+  filter(str_detect(name, "Skywalker"))
+
+skywalkers
+
+firewalkers <-starwars %>% 
+  mutate(name = str_replace(name, patter = "Sky", replacement = "Fire"))
+
+firewalkers
+
+
+# Cleaning up white space
+feedback <- c("  I ate   some nachos", "wednesday   morning  ")
+
+# remove the leading, trailing, and duplicate spaces
+str_squish(feedback)
+
+# remove just the leading and trailing spaces
+str_trim(feedback)
+
+# convert cases
+str_to_lower(feedback)
+str_to_upper(feedback)
+str_to_sentence(feedback)
+str_to_title(feedback)
+
+
+# Count the number of matches on a string
+
+str_count(feedback, pattern = "nachos")
