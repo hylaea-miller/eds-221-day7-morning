@@ -35,4 +35,57 @@ exp2 <- penguins %>%
             standard_dev = sd(flipper_length_mm),
             sample_size = n())
 
+data.frame(
+  stringsAsFactors = FALSE,
+          location = c("beach", "lagoon", "bluff", "oaks"),
+    full_site_name = c("Goleta Beach","UCSB Lagoon",
+                       "Ellwood Mesa","Fremont Campground"),
+      jurisdiction = c("SB City", "UCSB", "SB City", "USFS")
+)
+sites <- data.frame(
+                        stringsAsFactors = FALSE,
+                             check.names = FALSE,
+  `location	full_site_name	jurisdiction` = c("beach\tGoleta Beach\tSB City",
+                                             "lagoon\tUCSB Lagoon\tUCSB","bluff\tEllwood Mesa\tSB City",
+                                             "oaks\tFremont Campground\tUSFS",
+                                             "Ā")
+)
 
+
+animals <- data.table::data.table(
+    location = c("lagoon", "bluff", "creek", "oaks", "bluff"),
+     species = c("bobcat", "coyote", "fox", "squirrel", "bobcat"),
+    maturity = c("adult", "juvenile", "adult", "juvenile", "adult")
+)
+
+
+sites <- data.table::data.table(
+        location = c("beach", "lagoon", "bluff", "oaks"),
+  full_site_name = c("Goleta Beach","UCSB Lagoon",
+                     "Ellwood Mesa","Fremont Campground"),
+    jurisdiction = c("SB City", "UCSB", "SB City", "USFS")
+)
+
+#Practice with a full join
+# Keeps all rows and adds all columns
+
+full_join(animals, sites)
+
+
+# left_join()
+left_join(animals, sites)
+
+# right_join()
+
+right_join(animals, sites)
+
+# inner_join()
+inner_join(animals, sites)
+
+#Filtering joins
+semi_join_example <- semi_join(animals, sites)
+
+
+semi_join_example
+
+anti_join_example <- anti_join(animals, sites)
