@@ -86,6 +86,37 @@ inner_join(animals, sites)
 semi_join_example <- semi_join(animals, sites)
 
 
-semi_join_example
-
 anti_join_example <- anti_join(animals, sites)
+
+
+# Practice with lubridate
+my_date <- "03-13-1998"
+lubridate::mdy(my_date)
+
+# New format for date
+my_date <- "08-jun-1974"
+lubridate::dmy(my_date)
+
+# Another format
+my_date <- "19160518"
+lubridate::ymd(my_date)
+
+# What happens if we give a date that doesn't make sense
+
+lubridate::mdy("1942-08-31")
+lubridate::dmy("09/12/84")
+
+# working with date=times
+
+time <- "2020-08-12 11:18"
+time <- ymd_hm (time, tz = "America/Los_Angeles")
+
+# Convert to PDT
+with_tz(time, "America/Los_Angeles")
+
+# Extract info from dates
+week(time)
+year(time)
+day(time)
+
+
